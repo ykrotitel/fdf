@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 17:29:18 by acarlett          #+#    #+#             */
-/*   Updated: 2020/06/30 18:40:40 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/01 19:57:56 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,32 +34,49 @@ int		main(int argc, char **argv)
 {
 	t_help				*p;
 	int					fd;
+	char				*s;
+	char				**line;
+	int					i;
+	int					**mas;
+	int					j;
+	int					m;
 	
 	p = malloc(sizeof(t_help));
-	p->mlx = mlx_init();
-	p->a = 0x00CCFF;
-	p->i = 0;
-	p->win1 = mlx_new_window(p->mlx, WIN_X, WIN_Y, "Holla!");
-	if ((fd = open(argv[1], O_RDONLY)) <= 0)
-		return (error());
-	while (get_next_line(fd, &(p->line)) > 0)
+	i = 0;
+	j = 0;
+	m = 0;
+	fd = open(argv[1], O_RDONLY);
+	while (get_next_line(fd, &s) > 0)
 	{
-		p->i++;
-		free(p->line);
+		i++;
+		m = ft_takewith(s);
+		free(s);
 	}
-	close (fd);
-	p->str = malloc(sizeof(char *) * p->i);
-	if ((fd = open(argv[1], O_RDONLY)) <= 0)
-		return (error());
-	p->i = 0;
-	while (get_next_line(fd, &(p->str[p->i])) > 0)
-		p->i++;
-	p->i--;
-	while(p->i >= 0)
+	close(fd);
+	fd = open(argv[1], O_RDONLY);
+	line = malloc(sizeof(char *) * i);
+	mas = malloc(sizeof(int *) * i);
+	while(get_next_line(fd, &(line[j])) > 0)
 	{
-		printf ("%s\n", p->str[p->i]);
-		p->i--;
+		mas[j] = malloc(sizeof(int) * m);
+		j++;
 	}
+	m = 0;
+	j = 0;
+	while (m != i)
+	{
+		while (*line[m] != '\0')
+		{
+			mas[m][j] = ft_atoi(line[m]);
+			line[m] += (ft_howlong(mas[m][j]) + 1);
+			j++;
+		}
+		j = 0;
+		m++;
+	}
+	printf ("%d", mas[6][4]);
+	// p->mlx = mlx_init();
+	// p->win1 = mlx_new_window(p->mlx, WIN_X, WIN_Y, "Holla!");
 	// mlx_hook(p->win1, 2, 0, key_press, (void *)p);
 	// mlx_loop(p->mlx);
 	return (0);

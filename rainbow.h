@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 19:18:09 by acarlett          #+#    #+#             */
-/*   Updated: 2020/06/30 18:32:01 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/01 19:54:48 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ typedef struct      s_help
 	void			*img;
     char            *line;
     char            **str;
+    int             **coord;
     int             i;
+    int             j;
+    int             n;
+    int             m;
+    char            **split;
 }                   t_help;
 
 int     right(t_help *p, void *mlx, void *win1);
@@ -55,3 +60,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 void	*ft_memalloc(size_t size);
 size_t	ft_strlen(const char *str);
 void	*ft_memset(void *dest, int n, size_t size);
+int		ft_atoi(const char *str);
+char	**ft_strsplit(char const *s, char c);
+int		ft_takewith(char *s);
+int		ft_howlong(int a);

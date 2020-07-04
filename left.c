@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 15:42:37 by acarlett          #+#    #+#             */
-/*   Updated: 2020/06/29 17:00:45 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/04 16:41:58 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		left(t_help *p, void *mlx, void *win1)
 	p->derr =	(p->dy + 1);
 	p->diry =	p->y_end - p->y0;
 	p->diry =	(p->diry > 0 ? 1 : -1);
-	while (p->x0 != 0)
+	while (p->x0 != p->x_end)
 	{
 		mlx_pixel_put(mlx, win1, p->x0, p->y0, p->a);
 		p->err += p->derr;

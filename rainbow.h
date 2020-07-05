@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 19:18:09 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/04 20:04:13 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/05 10:54:57 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,13 @@ typedef struct      s_help
     int             a;
     int             x0;
     int             y0;
+    int             z0;
     int             x_end;
     int             y_end;
+    int             z_end;
     int             dirx;
     int             diry;
+    int             d;
     int             err;
     int             derr;
     int             dx;
@@ -46,6 +49,9 @@ typedef struct      s_help
     int             n;
     int             m;
     char            **split;
+    int             start_x;
+    int             start_y;
+    int             key;
 }                   t_help;
 
 int     right(t_help *p, void *mlx, void *win1, int color);
@@ -67,3 +73,4 @@ char	**ft_strsplit(char const *s, char c);
 int		ft_takewith(char *s);
 int		ft_howlong(int a);
 int		make_sharp(t_help *p, int **mas, int j, int i);
+int		spin_x(t_help *p, int **mas, int j, int i);

@@ -23,4 +23,4 @@ all:
 	@cc -I /usr/local/include $(SOURCES) -I $(INCLUDES) -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
 main: all
-	@./a.out test_maps/10-70.fdf
+	@./a.out test_maps/42.fdf

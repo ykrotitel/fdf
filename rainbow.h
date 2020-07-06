@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 19:18:09 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/05 10:54:57 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/06 17:49:48 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct      s_help
     int             j;
     int             n;
     int             m;
+    int             buff;
     char            **split;
     int             start_x;
     int             start_y;

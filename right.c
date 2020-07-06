@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 19:14:51 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/04 16:41:24 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/06 17:40:45 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ int     right(t_help *p, void *mlx, void *win1, int color)
 	p->diry =  	(p->diry > 0 ? 1 : -1);
 	while (p->x0 != p->x_end)
 	{
+		if (p->x0 > WIN_X || p->y0 > WIN_Y || p->x0 < 0 || p->y0 < 0)
+			p->x0++;
+		else
+		{	
 		mlx_pixel_put(mlx, win1, p->x0, p->y0, p->a);
 		p->err += p->derr;
 		if (p->err >= (p->dx + 1))
@@ -34,6 +38,7 @@ int     right(t_help *p, void *mlx, void *win1, int color)
 			p->err -= (p->dx + 1);
 		}
 		p->x0++;
+		}
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 17:29:18 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/05 12:08:11 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/06 20:22:42 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ int		key_press(int key, void *l)
 		exit(0);
 	else if (key == 124)
 	{
-		alpha_z += 0.005;
+		alpha_z += 0.1;
 		blackground(p->mlx, p->win1, p);
 		make_sharp(p, p->coord, p->n, p->i);
 	}
 	else if (key == 123)
 	{
-		alpha_z -= 0.005;
+		alpha_z -= 0.1;
 		blackground(p->mlx, p->win1, p);
 		make_sharp(p, p->coord, p->n, p->i);
 	}
@@ -72,8 +72,8 @@ int		key_press(int key, void *l)
 
 int		spin_x(t_help *p, int **mas, int j, int i)
 {
-	int		start_z;
 	int		start_y;
+	int		start_z;
 	int		ii;
 	int		jj;
 
@@ -85,38 +85,38 @@ int		spin_x(t_help *p, int **mas, int j, int i)
 	{
 		while (ii != p->i)
 		{
-			p->x0 = (mas[i][j] * cos(alpha_x) - start_y * sin(alpha_x));
-			p->y0 = (start_y * cos(alpha_x) + mas[i][j] * sin(alpha_x));
-			p->x_end = ((mas[i][j] + p->d) * cos(alpha_x) - start_y * sin(alpha_x));
-			p->y_end = (start_y * cos(alpha_x) + (mas[i][j] + p->d) * sin(alpha_x));
+	write (1, "123\n", 4);
+			p->x0 = (mas[ii][jj] * cos(alpha_x) - start_z * sin(alpha_x));
+			p->y0 = (start_z * cos(alpha_x) + mas[ii][jj] * sin(alpha_x));
+			p->x_end = (mas[ii + 1][jj] * cos(alpha_x) - start_z * sin(alpha_x));
+			p->y_end = (start_z * cos(alpha_x) + mas[ii + 1][jj] * sin(alpha_x));
 			make_line(p, p->mlx, p->win1, p->a);
 			start_z += p->d;
 			ii++;
 		}
 		ii = 0;
 		jj++;
-		start_y += p->d;
 	}
 	jj = 0;
 	ii = 0;
 	start_y = p->start_y;
 	start_z = p->start_x;
-	while (ii <= p->i)
-	{
-		while (jj != p->j)
-		{
-			p->x0 = (mas[i][j] * cos(alpha_x) - start_y * sin(alpha_x));
-			p->y0 = (start_y * cos(alpha_x) + mas[i][j] * sin(alpha_x));
-			p->x_end = (mas[i][j] * cos(alpha_x) - (start_y + p->d) * sin(alpha_x));
-			p->y_end = ((start_y + p->d) * cos(alpha_x) + mas[i][j] * sin(alpha_x));
-			make_line(p, p->mlx, p->win1, p->a);
-			jj++;
-			start_y += p->d;
-		}
-		jj = 0;
-		ii++;
-		start_z += p->d;
-	}
+	// while (ii <= p->i)
+	// {
+	// 	while (jj != p->j)
+	// 	{
+	// 		p->x0 = (mas[i][j] * cos(alpha_x) - start_y * sin(alpha_x));
+	// 		p->y0 = (start_y * cos(alpha_x) + mas[i][j] * sin(alpha_x));
+	// 		p->x_end = (mas[i][j] * cos(alpha_x) - (start_y + p->d) * sin(alpha_x));
+	// 		p->y_end = ((start_y + p->d) * cos(alpha_x) + mas[i][j] * sin(alpha_x));
+	// 		make_line(p, p->mlx, p->win1, p->a);
+	// 		jj++;
+	// 		start_y += p->d;
+	// 	}
+	// 	jj = 0;
+	// 	ii++;
+	// 	start_z += p->d;
+	// }
 	return (0);
 }
 
@@ -131,14 +131,23 @@ int		spin_z(t_help *p, int m, int n, int d)
 	{
 		while (ii)
 		{
-			p->x0 = (m * cos(alpha_z) - n * sin(alpha_z));
-			p->y0 = (n * cos(alpha_z) - m * sin(alpha_z));
-			p->x_end = ((m + d) * cos(alpha_z) - n * sin(alpha_z));
-			p->y_end = (n * cos(alpha_z) - (m + d) * sin(alpha_z));
+			p->x0 = ((m - (WIN_X / 2)) * cos(alpha_z) - (n - (WIN_Y / 2)) * sin(alpha_z) + (WIN_X / 2));
+			p->y0 = ((n - (WIN_Y / 2)) * cos(alpha_z) + (m - (WIN_X / 2)) * sin(alpha_z) + (WIN_X / 2));
+			p->x_end = (((m - (WIN_X / 2)) + d) * cos(alpha_z) - (n - (WIN_Y / 2)) * sin(alpha_z)) + (WIN_X / 2);
+			p->y_end = ((n - (WIN_Y / 2)) * cos(alpha_z) + ((m - (WIN_X / 2)) + d) * sin(alpha_z)) + (WIN_X / 2);
+			if (p->x0 < 0 || p->y0 < 0 || p->x0 > WIN_X || p->y0 > WIN_Y)
+			{
+				p->buff = p->x_end;
+				p->x_end = p->x0;
+				p->x0 = p->buff;
+				p->buff = p->y_end;
+				p->y_end = p->y0;
+				p->y0 = p->buff;
+			}
 			make_line(p, p->mlx, p->win1, p->a);
 			m += d;
 			ii--;
-		}
+		}	
 		p->a = p->a + (d / 3);
 		m = p->start_x;
 		n += d;
@@ -150,24 +159,33 @@ int		spin_z(t_help *p, int m, int n, int d)
 	ii = p->i;	
 	p->a = 0x00CC11;
 	jj = p->j;
-	while (ii >= 0)
-	{
-		while (jj)
-		{
-			p->x0 = (m * cos(alpha_z) - n * sin(alpha_z));
-			p->y0 = (n * cos(alpha_z) - m * sin(alpha_z));
-			p->x_end = (m * cos(alpha_z) - (n + d) * sin(alpha_z));
-			p->y_end = ((n + d) * cos(alpha_z) - m * sin(alpha_z));
-			make_line(p, p->mlx, p->win1, p->a);
-			n += d;
-			jj--;
-		}
-		p->a = p->a + (d / 3);
-		n = p->start_y;
-		m += d;
-		jj = p->j;
-		ii--;
-	}
+	// while (ii >= 0)
+	// {
+	// 	while (jj)
+	// 	{
+	// 		p->x0 = ((m - (WIN_X / 2)) * cos(alpha_z) - (n - (WIN_Y / 2)) * sin(alpha_z)) + (WIN_X / 2);
+	// 		p->y0 = ((n - (WIN_Y / 2)) * cos(alpha_z) + (m - (WIN_X / 2)) * sin(alpha_z)) + (WIN_X / 2);
+	// 		p->x_end = ((m - (WIN_X / 2)) * cos(alpha_z) - ((n - (WIN_Y / 2)) + d) * sin(alpha_z)) + (WIN_X / 2);
+	// 		p->y_end = (((n - (WIN_Y / 2)) + d) * cos(alpha_z) + (m - (WIN_X / 2)) * sin(alpha_z)) + (WIN_X / 2);
+	// 		if (p->x0 < 0 || p->y0 < 0 || p->x0 > WIN_X || p->y0 > WIN_Y)
+	// 		{
+	// 			p->buff = p->x_end;
+	// 			p->x_end = p->x0;
+	// 			p->x0 = p->buff;
+	// 			p->buff = p->y_end;
+	// 			p->y_end = p->y0;
+	// 			p->y0 = p->buff;
+	// 		}
+	// 		make_line(p, p->mlx, p->win1, p->a);
+	// 		n += d;
+	// 		jj--;
+	// 	}
+	// 	p->a = p->a + (d / 3);
+	// 	n = p->start_y;
+	// 	m += d;
+	// 	jj = p->j;
+	// 	ii--;
+	// }
 	return (0);
 }
 
@@ -200,12 +218,12 @@ int		make_sharp(t_help *p, int **mas, int j, int i)
 	p->start_x = start_x;
 	p->start_y = start_y;
 	p->d = d;
-	printf ("key === %d\n", p->key);
 	if (p->key == 123 || p->key == 124)
 		spin_z(p, m, n, d);
 	else if (p->key == 125 || p->key == 126)
+	{
 		spin_x(p, p->coord, p->n, p->i);
-
+	}
 	return (0);
 }
 
@@ -233,6 +251,7 @@ int		main(int argc, char **argv)
 		free(s);
 	}
 	close(fd);
+	printf ("i === %d\n", i);
 	fd = open(argv[1], O_RDONLY);
 	line = malloc(sizeof(char *) * i);
 	mas = malloc(sizeof(int *) * i);
@@ -241,6 +260,7 @@ int		main(int argc, char **argv)
 		mas[j] = malloc(sizeof(int) * m);
 		j++;
 	}
+	printf ("j === %d\n", m);
 	m = 0;
 	j = 0;
 	while (m != i)
@@ -257,6 +277,7 @@ int		main(int argc, char **argv)
 	}
 	p->coord = mas;
 	p->i = i;
+	write (1, "RT\n", 3);
 	p->mlx = mlx_init();
 	p->win1 = mlx_new_window(p->mlx, WIN_X, WIN_Y, "Holla!");
 	mlx_hook(p->win1, 2, 0, key_press, (void *)p);

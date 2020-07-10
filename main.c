@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 17:29:18 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/07 21:11:47 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/10 20:59:14 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int		key_press(int key, void *l)
 
 	p = (t_help *)l;
 	p->key = key;
-	printf ("p->n = %d   p->i = %d\n", p->n, p->i);
 	if (key == 53)
 		exit(0);
 	else if (key == 124)
@@ -76,26 +75,6 @@ int		key_press(int key, void *l)
 	return 0;
 }
 
-int		spin_x(t_help *p, int **mas, int j, int i)
-{
-	int		starty;
-	int		startz;
-	int		ii;
-	int		jj;
-
-	ii = 0;
-	jj = 0;
-	starty = 
-	printf ("i = %d  !!!  j = %d\n", p->i, p->j);
-	while (ii <= p->i)
-	{
-		while (jj <= p->j)
-		{
-			// p->x0 = 
-		}
-	}
-	return (0);
-}
 
 int		spin_z(t_help *p, int m, int n, int d)
 {
@@ -108,7 +87,6 @@ int		spin_z(t_help *p, int m, int n, int d)
 	jj = p->j;
 	startx = m;
 	starty = n;
-	printf ("startx = %d starty = %d\n", startx, starty);
 	while (jj >= 0)
 	{
 		while (ii)
@@ -136,8 +114,6 @@ int		spin_z(t_help *p, int m, int n, int d)
 		ii = p->i;
 		jj--;
 	}
-	// m = p->start_x;
-	// n = p->start_y;
 	startx = p->start_x;
 	starty = p->start_y;
 	p->a = 0x00CC11;
@@ -173,6 +149,80 @@ int		spin_z(t_help *p, int m, int n, int d)
 	return (0);
 }
 
+
+int		spin_x(t_help *p, int m, int n, int d, int **mas)
+{
+	int		ii;
+	int		jj;
+	int		startx;
+	int 	starty;
+
+	ii = 0;
+	jj = 0;
+	startx = m;
+	starty = n;
+	p->a = 0x00CC11;
+	while (jj < p->j)
+	{
+		while (ii <= p->i)
+		{
+			p->x0 = startx;
+			p->y0 = (float)(starty) * cos(alpha_x) + (float)mas[jj][ii] * sin(alpha_x);
+			p->x_end = startx + p->d;
+			p->y_end = (float)(starty) * cos(alpha_x) + (float)mas[jj][ii + 1] * sin(alpha_x);
+			if (p->x0 < 0 || p->y0 < 0 || p->x0 > WIN_X || p->y0 > WIN_Y)
+			{
+				p->buff = p->x_end;
+				p->x_end = p->x0;
+				p->x0 = p->buff;
+				p->buff = p->y_end;
+				p->y_end = p->y0;
+				p->y0 = p->buff;
+			}
+			make_line(p, p->mlx, p->win1, p->a);
+			startx += d;
+			ii++;
+		}	
+		p->a = p->a + (d / 3);
+		startx = p->start_x;
+		starty += d;
+		ii = 0;
+		jj++;
+	}
+	ii = 0;
+	jj = 0;
+	startx = m;
+	starty = n;
+	while (ii <= p->i)
+	{
+		while (jj < p->j)
+		{
+			p->x0 = startx;
+			p->y0 = (float)(starty) * cos(alpha_x) + (float)mas[jj][ii] * sin(alpha_x);
+			p->x_end = startx;
+			p->y_end = (float)(starty + p->d) * cos(alpha_x) + (float)mas[jj][ii + 1] * sin(alpha_x);
+			if (p->x0 < 0 || p->y0 < 0 || p->x0 > WIN_X || p->y0 > WIN_Y)
+			{
+				p->buff = p->x_end;
+				p->x_end = p->x0;
+				p->x0 = p->buff;
+				p->buff = p->y_end;
+				p->y_end = p->y0;
+				p->y0 = p->buff;
+			}
+			make_line(p, p->mlx, p->win1, p->a);
+			starty += d;
+			jj++;
+		}	
+		p->a = p->a + (d / 3);
+		starty = p->start_y;
+		startx += d;
+		jj = 0;
+		ii++;
+	}
+	return (0);
+}
+
 int		make_sharp(t_help *p, int **mas, int j, int i)
 {
 	int		start_x;
@@ -185,7 +235,6 @@ int		make_sharp(t_help *p, int **mas, int j, int i)
 	p->i = i;
 	p->a =     	0x00CC11;
 	p->j = j;
-
 	max = MAX(i, j);
 	d = (WIN_X - 200) / max;
 	if (max == i)
@@ -206,9 +255,7 @@ int		make_sharp(t_help *p, int **mas, int j, int i)
 	if (p->key == 123 || p->key == 124)
 		spin_z(p, m, n, d);
 	else if (p->key == 125 || p->key == 126)
-	{
-		spin_x(p, p->coord, p->n, p->i);
-	}
+		spin_x(p, m, n, d, mas);
 	return (0);
 }
 
@@ -220,6 +267,7 @@ int		main(int argc, char **argv)
 	char				**line;
 	int					i;
 	int					**mas;
+	char				*buff;
 	int					j;
 	int					m;
 	
@@ -238,8 +286,8 @@ int		main(int argc, char **argv)
 		free(s);
 	}
 	p->n = m - 1;
+	p->m = m;
 	close(fd);
-	printf ("i === %d and m = %d\n", i, m);
 	fd = open(argv[1], O_RDONLY);
 	line = malloc(sizeof(char *) * i);
 	mas = malloc(sizeof(int *) * i);
@@ -248,22 +296,30 @@ int		main(int argc, char **argv)
 		mas[j] = malloc(sizeof(int) * m);
 		j++;
 	}
-	m = 0;
+	p->j = j - 1;
 	j = 0;
-	while (m != i)
+	m = 0;
+	while (j <= p->j)
 	{
-		while ((*line)[j] != '\0')
+		buff = line[j];
+		while (m != p->m)
 		{
-			mas[m][j] = ft_atoi(line[m]);
-			line[m] += (ft_howlong(mas[m][j]) + 1);
-			j++;
+			while (*buff == ' ')
+				buff++;
+			mas[j][m] = ft_atoi(buff);
+			while (*buff != ' ')
+				buff++;
+			printf ("%d ", mas[j][m]);
+			m++;
 		}
-		j = 0;
-		m++;
+		printf ("\n");
+		m = 0;
+		j++;
 	}
 	p->coord = mas;
 	p->i = i - 1;
 	mlx_hook(p->win1, 2, 0, key_press, (void *)p);
+	make_sharp(p, mas, p->n, p->i);
 	mlx_loop(p->mlx);
 	return (0);
 }

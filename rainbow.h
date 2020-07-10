@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 19:18:09 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/06 17:49:48 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/10 20:53:21 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,4 @@ char	**ft_strsplit(char const *s, char c);
 int		ft_takewith(char *s);
 int		ft_howlong(int a);
 int		make_sharp(t_help *p, int **mas, int j, int i);
-int		spin_x(t_help *p, int **mas, int j, int i);
+

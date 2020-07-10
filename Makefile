@@ -23,7 +23,7 @@ all:
 	@cc -I /usr/local/include $(SOURCES) -I $(INCLUDES) -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
 main: all
-	@./a.out test_maps/plat.fdf
+	@./a.out test_maps/10-70.fdf
 
 clean:
 	@rm -rf a.out

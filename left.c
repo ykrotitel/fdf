@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 15:42:37 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/06 18:07:24 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/11 20:50:59 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ int		left(t_help *p, void *mlx, void *win1)
 		if (p->x0 > WIN_X || p->y0 > WIN_Y || p->x0 < 0 || p->y0 < 0)
 			p->x0--;
 		else
-		{	
-			mlx_pixel_put(mlx, win1, p->x0, p->y0, p->a);
+		{
+			p->data[p->y0 * WIN_X + p->x0] = p->a;
+			// mlx_pixel_put(mlx, win1, p->x0, p->y0, p->a);
 			p->err += p->derr;
 			if (p->err >= (p->dx + 1))
 			{

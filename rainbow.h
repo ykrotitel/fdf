@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 19:18:09 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/10 20:53:21 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/11 20:59:27 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ typedef struct      s_help
     int             start_x;
     int             start_y;
     int             key;
+    int             *data;
+    int             q1;
+    int             q2;
+    int             q3;
 }                   t_help;
 
 int     right(t_help *p, void *mlx, void *win1, int color);
@@ -74,4 +78,5 @@ char	**ft_strsplit(char const *s, char c);
 int		ft_takewith(char *s);
 int		ft_howlong(int a);
 int		make_sharp(t_help *p, int **mas, int j, int i);
-
+int		make_increase(t_help *p, int **mas, int key);
+int		make_unincrease(t_help *p, int **mas, int key);

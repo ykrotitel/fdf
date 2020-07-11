@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 15:54:02 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/06 19:04:41 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/11 19:37:16 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,18 @@
 	if ((p->x0 >= p->x_end) && (p->dx >= p->dy))
 	{
 		left(p, mlx, win1);
-		// write (1, "left\n", 5);
 	}
 	else if((p->x_end >= p->x0) && (p->dx >= p->dy))
 	{
 			right(p, mlx, win1, color);
-		// write (1, "right\n", 6);
 	}
 	else if(p->y_end <= p->y0 && (p->dy >= p->dx))
 	{
 		up(p, mlx, win1);
-		// write (1, "up\n", 3);
 	}
 	else if (p->y_end >= p->y0 && p->dy >= p->dx)
 	{
 		down(p, mlx, win1, color);
-		// write (1, "down\n", 5);
 	}
 	return (0);
  }

@@ -22,8 +22,20 @@ INCLUDES =	rainbow.h \
 all:
 	@cc -I /usr/local/include $(SOURCES) -I $(INCLUDES) -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
-main: all
+main1: all
+	@./a.out test_maps/42.fdf
+
+main2: all
 	@./a.out test_maps/10-70.fdf
+
+main3: all
+	@./a.out test_maps/pylone.fdf
+
+main4: all
+	@./a.out test_maps/pentenegpos.fdf
+
+main6: all
+	@./a.out test_maps/mars.fdf
 
 clean:
 	@rm -rf a.out

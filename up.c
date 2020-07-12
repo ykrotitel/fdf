@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 14:27:28 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/11 20:53:37 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/12 18:58:00 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		up(t_help *p, void *mlx, void *win1)
 {
-	p->a =     0x00CCFF;
 	p->dx = ABS((p->x_end - p->x0));
 	p->dy = ABS((p->y_end - p->y0));
 	p->x0 = ABS(p->x0);
@@ -25,7 +24,7 @@ int		up(t_help *p, void *mlx, void *win1)
 	p->dirx = ((p->x_end - p->x0) > 0 ? 1 : -1);
 	while (p->y0 >= p->y_end)
 	{
-		if (p->x0 > WIN_X || p->y0 > WIN_Y || p->x0 < 0 || p->y0 < 0)
+		if (p->x0 >= WIN_X || p->y0 >= WIN_Y || p->x0 < 0 || p->y0 < 0)
 			p->y0--;
 		else
 		{	

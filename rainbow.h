@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 19:18:09 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/11 20:59:27 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/12 20:02:50 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,14 @@
 #include <fcntl.h>
 #include <math.h> 
 
-# define WIN_X       800
-# define WIN_Y       800
+# define WIN_X       1200
+# define WIN_Y       1200
 # define BUFF_SIZE 300000
 # define ABS(x)         (x < 0 ? -x : x)
-// # define MAX(x, y)      (x > y ? x : y)
 
 typedef struct      s_help
 {
-    int             a;
+    float             a;
     int             x0;
     int             y0;
     int             z0;
@@ -80,3 +79,4 @@ int		ft_howlong(int a);
 int		make_sharp(t_help *p, int **mas, int j, int i);
 int		make_increase(t_help *p, int **mas, int key);
 int		make_unincrease(t_help *p, int **mas, int key);
+int		tuda(t_help *p, int **mas, int key);

@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 17:29:18 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/11 21:01:16 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/12 20:12:56 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int		error()
 
 float		alpha_z = 0.0;
 float		alpha_x = 0.0;
+float		le_perspective = 400.0;
+float 		kof = 2.5;
 
 int		blackground(void *mlx, void *win1, t_help *p)
 {
@@ -34,7 +36,7 @@ int		blackground(void *mlx, void *win1, t_help *p)
 		p->y0 = j;
 		p->x_end = WIN_X;
 		p->y_end = j;
-		make_line(p, mlx, win1, 0x000000);
+		make_line(p, mlx, win1, 0x303030);
 		j++;
 	}
 	return (0);
@@ -46,7 +48,6 @@ int		key_press(int key, void *l)
 
 	p = (t_help *)l;
 	p->key = key;
-	// printf ("key = %d\n", key);
 	if (key == 53)
 		exit(0);
 	else if (key == 124)
@@ -96,11 +97,12 @@ int		make_increase(t_help *p, int **mas, int key)
 
 	ii = 0;
 	jj = 0;
+			kof += 2;
 	while (ii <= p->i)
 	{
 		while (jj <= p->n)
 		{
-			mas[ii][jj] *= (-2);
+			mas[ii][jj] *= 2;
 			jj++;
 		}
 		jj = 0;
@@ -116,6 +118,7 @@ int		make_unincrease(t_help *p, int **mas, int key)
 
 	ii = 0;
 	jj = 0;
+			kof -= 2;
 	while (ii <= p->i)
 	{
 		while (jj <= p->n)
@@ -129,6 +132,7 @@ int		make_unincrease(t_help *p, int **mas, int key)
 	return (0);
 }
 
+
 int		spin_x(t_help *p, int m, int n, int d, int **mas)
 {
 	int		ii;
@@ -140,21 +144,30 @@ int		spin_x(t_help *p, int m, int n, int d, int **mas)
 	jj = 0;
 	startx = n;
 	starty = m;
-	p->a = 0x00CC11;
+	p->a = 0x800000;
 	while (jj <= p->i)
 	{
 		while (ii < p->j)
 		{
-			/*p->x0*/	float tx0 = (startx - WIN_X / 2);
-			/*p->y0*/	float ty0 = (float)(starty - WIN_Y / 2) * cos(alpha_x) + (float)mas[jj][ii] * sin(alpha_x);
-			/*p->x_end*/float tx1 = (startx - WIN_X / 2) + p->d;
-			/*p->y_end*/float ty1 = (float)(starty - WIN_Y / 2) * cos(alpha_x) + (float)mas[jj][ii + 1] * sin(alpha_x);
+			float tx0 = (startx - WIN_X / 2);
+			float ty0 = (float)(starty - WIN_Y / 2) * cos(alpha_x) + (float)mas[jj][ii] * sin(alpha_x);
+			float z0 = (float)mas[jj][ii] * cos(alpha_x) - (float)(starty - WIN_Y / 2) * sin(alpha_x);
+			float tx1 = (startx - WIN_X / 2) + p->d;
+			float ty1 = (float)(starty - WIN_Y / 2) * cos(alpha_x) + (float)mas[jj][ii + 1] * sin(alpha_x);
+			float z1 = (float)mas[jj][ii + 1] * cos(alpha_x) - (float)(starty - WIN_Y / 2) * sin(alpha_x);
 
 
-			p->x0 = (tx0 * cos(alpha_z) - (ty0) * sin(alpha_z) + (WIN_X / 2));
-			p->y0 = ((ty0) * cos(alpha_z) + (tx0) * sin(alpha_z) + (WIN_X / 2));
-			p->x_end = ((tx1) * cos(alpha_z) - (ty1 * sin(alpha_z))) + (WIN_X / 2);
-			p->y_end = (ty1 * cos(alpha_z) + ((tx1) * sin(alpha_z))) + (WIN_X / 2);
+			p->x0 = (tx0 * cos(alpha_z) - (ty0) * sin(alpha_z));
+			p->y0 = ((ty0) * cos(alpha_z) + (tx0) * sin(alpha_z));
+			p->x_end = ((tx1) * cos(alpha_z) - (ty1 * sin(alpha_z)));
+			p->y_end = (ty1 * cos(alpha_z) + ((tx1) * sin(alpha_z)));
+
+			float per0 = le_perspective / (le_perspective - z0);
+			float per1 = le_perspective / (le_perspective - z1);
+			p->x0 = (float)p->x0 * per0 + (WIN_X / 2);
+			p->y0 = (float)p->y0 * per0 + (WIN_X / 2);
+			p->x_end = (float)p->x_end * per1 + (WIN_X / 2);
+			p->y_end = (float)p->y_end * per1 + (WIN_X / 2);
 
 			if (p->x0 < 0 || p->y0 < 0 || p->x0 > WIN_X || p->y0 > WIN_Y)
 			{
@@ -165,7 +178,8 @@ int		spin_x(t_help *p, int m, int n, int d, int **mas)
 				p->y_end = p->y0;
 				p->y0 = p->buff;
 			}
-			make_line(p, p->mlx, p->win1, p->a);
+			if (z0 * kof < le_perspective && z1 * kof < le_perspective)
+				make_line(p, p->mlx, p->win1, p->a);
 			startx += d;
 			ii++;
 		}	
@@ -179,19 +193,31 @@ int		spin_x(t_help *p, int m, int n, int d, int **mas)
 	jj = 0;
 	startx = n;
 	starty = m;
+	p->a = 0x800000;
 	while (jj <= p->j)
 	{
 		while (ii < p->i)
 		{
 			float tx0 = (startx - WIN_X / 2);
-			float ty0 = (float)(starty - WIN_Y / 2) * cos(alpha_x) + (float)mas[ii][jj] * sin(alpha_x);
+			float ty0 = (float)(starty - WIN_Y / 2) * cos(alpha_x) + (float)mas[ii][jj] * sin(alpha_x);			
+			float tz0 = (float)mas[ii][jj] * cos(alpha_x) - (float)(starty - WIN_Y / 2) * sin(alpha_x);
 			float tx1 = (startx - WIN_X / 2);
 			float ty1 = (float)((starty - WIN_Y / 2) + p->d) * cos(alpha_x) + (float)mas[ii + 1][jj] * sin(alpha_x);
+			float tz1 = (float)mas[ii + 1][jj] * cos(alpha_x) - (float)((starty + p->d) - WIN_Y / 2) * sin(alpha_x);
 
-			p->x0 = (tx0 * cos(alpha_z) - (ty0) * sin(alpha_z) + (WIN_X / 2));
-			p->y0 = ((ty0) * cos(alpha_z) + (tx0) * sin(alpha_z) + (WIN_X / 2));
-			p->x_end = ((tx1) * cos(alpha_z) - (ty1 * sin(alpha_z))) + (WIN_X / 2);
-			p->y_end = (ty1 * cos(alpha_z) + ((tx1) * sin(alpha_z))) + (WIN_X / 2);
+			p->x0 = (tx0 * cos(alpha_z) - (ty0) * sin(alpha_z));
+			p->y0 = ((ty0) * cos(alpha_z) + (tx0) * sin(alpha_z));
+			p->x_end = ((tx1) * cos(alpha_z) - (ty1 * sin(alpha_z)));
+			p->y_end = (ty1 * cos(alpha_z) + ((tx1) * sin(alpha_z)));
+
+			float perr0 = le_perspective / (le_perspective - tz0);
+			float perr1 = le_perspective / (le_perspective - tz1);
+
+			p->x0 = (float)p->x0 * perr0 + (WIN_X / 2);
+			p->y0 = (float)p->y0 * perr0 + (WIN_X / 2);
+			p->x_end = (float)p->x_end * perr1 + (WIN_X / 2);
+			p->y_end = (float)p->y_end * perr1 + (WIN_X / 2);
+			
 			if (p->x0 < 0 || p->y0 < 0 || p->x0 > WIN_X || p->y0 > WIN_Y)
 			{
 				p->buff = p->x_end;
@@ -201,11 +227,12 @@ int		spin_x(t_help *p, int m, int n, int d, int **mas)
 				p->y_end = p->y0;
 				p->y0 = p->buff;
 			}
-			make_line(p, p->mlx, p->win1, p->a);
+			if (tz0 * kof < le_perspective && tz1 * kof < le_perspective)
+				make_line(p, p->mlx, p->win1, p->a);
 			starty += d;
 			ii++;
 		}
-		p->a = p->a + (d / 3);
+		p->a = p->a + (d / 2);
 		starty = m;
 		startx += d;
 		ii = 0;
@@ -247,7 +274,7 @@ int		spin_z(t_help *p, int m, int n, int d)
 			startx += d;
 			jj--;
 		}	
-		p->a = p->a + (d / 3);
+		p->a = p->a + (d / 2);
 		startx = n;
 		starty += d;
 		jj = p->j;
@@ -281,7 +308,7 @@ int		spin_z(t_help *p, int m, int n, int d)
 			starty += d;
 			ii--;
 		}
-		p->a = p->a + (d / 3);
+		p->a = p->a + (d / 2);
 		starty = m;
 		startx += d;
 		ii = p->i;
@@ -300,7 +327,7 @@ int		make_sharp(t_help *p, int **mas, int j, int i)
 	int		d;
 
 	p->i = i;
-	p->a =     	0x00CC11;
+	p->a = 0x800000;
 	p->j = j;
 	max = MAX(i, j);
 	d = (WIN_X - 200) / max;
@@ -319,9 +346,6 @@ int		make_sharp(t_help *p, int **mas, int j, int i)
 	p->start_x = start_x;
 	p->start_y = start_y;
 	p->d = d;
-	// if (p->key == 123 || p->key == 124)
-	// 	spin_z(p, m, n, d);
-	// else if (p->key == 125 || p->key == 126 || p->key == 19 || p->key == 20)
 		spin_x(p, m, n, d, mas);
 	return (0);
 }
@@ -379,7 +403,6 @@ int		main(int argc, char **argv)
 			mas[j][m] = ft_atoi(buff);
 			while (*buff != ' ')
 				buff++;
-			// printf ("%d ", mas[j][m]);
 			m++;
 		}
 		m = 0;

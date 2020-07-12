@@ -37,6 +37,9 @@ main4: all
 main6: all
 	@./a.out test_maps/mars.fdf
 
+main7: all
+	@./a.out test_maps/pyramide.fdf
+
 clean:
 	@rm -rf a.out
 

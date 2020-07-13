@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 17:29:18 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/12 20:12:56 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/13 16:37:46 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ int		error()
 	return (0);
 }
 
-float		alpha_z = 0.0;
 float		alpha_x = 0.0;
-float		le_perspective = 400.0;
+float		alpha_y = 0.0;
+float		alpha_z = 0.0;
+float		le_perspective = 600.0;
 float 		kof = 2.5;
 
 int		blackground(void *mlx, void *win1, t_help *p)
@@ -48,6 +49,7 @@ int		key_press(int key, void *l)
 
 	p = (t_help *)l;
 	p->key = key;
+	printf ("key == %d\n", key);
 	if (key == 53)
 		exit(0);
 	else if (key == 124)
@@ -64,13 +66,13 @@ int		key_press(int key, void *l)
 	}
 	else if (key == 125)
 	{
-		alpha_x -= 0.025;
+		alpha_x -= 0.1;
 		blackground(p->mlx, p->win1, p);
 		make_sharp(p, p->coord, p->n, p->i);
 	}
 	else if (key == 126)
 	{
-		alpha_x += 0.025;
+		alpha_x += 0.1;
 		blackground(p->mlx, p->win1, p);
 		make_sharp(p, p->coord, p->n, p->i);
 	}
@@ -86,6 +88,18 @@ int		key_press(int key, void *l)
 		blackground(p->mlx, p->win1, p);
 		make_sharp(p, p->coord, p->n, p->i);
 	}
+	else if (key == 33)
+	{
+		alpha_y += 0.1;
+		blackground(p->mlx, p->win1, p);
+		make_sharp(p, p->coord, p->n, p->i);
+	}
+	else if (key == 30)
+	{
+		alpha_y -= 0.1;
+		blackground(p->mlx, p->win1, p);
+		make_sharp(p, p->coord, p->n, p->i);
+	}
 	mlx_put_image_to_window(p->mlx, p->win1, p->img, 0, 0);
 	return 0;
 }
@@ -97,7 +111,6 @@ int		make_increase(t_help *p, int **mas, int key)
 
 	ii = 0;
 	jj = 0;
-			kof += 2;
 	while (ii <= p->i)
 	{
 		while (jj <= p->n)
@@ -118,7 +131,6 @@ int		make_unincrease(t_help *p, int **mas, int key)
 
 	ii = 0;
 	jj = 0;
-			kof -= 2;
 	while (ii <= p->i)
 	{
 		while (jj <= p->n)
@@ -151,19 +163,26 @@ int		spin_x(t_help *p, int m, int n, int d, int **mas)
 		{
 			float tx0 = (startx - WIN_X / 2);
 			float ty0 = (float)(starty - WIN_Y / 2) * cos(alpha_x) + (float)mas[jj][ii] * sin(alpha_x);
-			float z0 = (float)mas[jj][ii] * cos(alpha_x) - (float)(starty - WIN_Y / 2) * sin(alpha_x);
+			float tz0 = (float)mas[jj][ii] * cos(alpha_x) - (float)(starty - WIN_Y / 2) * sin(alpha_x);
 			float tx1 = (startx - WIN_X / 2) + p->d;
 			float ty1 = (float)(starty - WIN_Y / 2) * cos(alpha_x) + (float)mas[jj][ii + 1] * sin(alpha_x);
-			float z1 = (float)mas[jj][ii + 1] * cos(alpha_x) - (float)(starty - WIN_Y / 2) * sin(alpha_x);
+			float tz1 = (float)mas[jj][ii + 1] * cos(alpha_x) - (float)(starty - WIN_Y / 2) * sin(alpha_x);
 
+			float t_tx0 = tx0 * cos(alpha_y) + tz0 * sin(alpha_y);
+			float t_ty0 = ty0;
+			float t_tz0 = tz0 * cos(alpha_y) - tx0 * sin(alpha_y);
+			float t_tx1 = tx1 * cos(alpha_y) + tz1 * sin(alpha_y);
+			float t_ty1 = ty1;
+			float t_tz1 = tz1 * cos(alpha_y) - tx1 * sin(alpha_y); 
 
-			p->x0 = (tx0 * cos(alpha_z) - (ty0) * sin(alpha_z));
-			p->y0 = ((ty0) * cos(alpha_z) + (tx0) * sin(alpha_z));
-			p->x_end = ((tx1) * cos(alpha_z) - (ty1 * sin(alpha_z)));
-			p->y_end = (ty1 * cos(alpha_z) + ((tx1) * sin(alpha_z)));
+			p->x0 = (t_tx0 * cos(alpha_z) - t_ty0 * sin(alpha_z));
+			p->y0 = (t_ty0 * cos(alpha_z) + t_tx0 * sin(alpha_z));
+			p->x_end = (t_tx1 * cos(alpha_z) - t_ty1 * sin(alpha_z));
+			p->y_end = (t_ty1 * cos(alpha_z) + t_tx1 * sin(alpha_z));
 
-			float per0 = le_perspective / (le_perspective - z0);
-			float per1 = le_perspective / (le_perspective - z1);
+			float per0 = le_perspective / (le_perspective - t_tz0);
+			float per1 = le_perspective / (le_perspective - t_tz1);
+			
 			p->x0 = (float)p->x0 * per0 + (WIN_X / 2);
 			p->y0 = (float)p->y0 * per0 + (WIN_X / 2);
 			p->x_end = (float)p->x_end * per1 + (WIN_X / 2);
@@ -178,12 +197,12 @@ int		spin_x(t_help *p, int m, int n, int d, int **mas)
 				p->y_end = p->y0;
 				p->y0 = p->buff;
 			}
-			if (z0 * kof < le_perspective && z1 * kof < le_perspective)
+			if (t_tz0 * kof < le_perspective && t_tz1 * kof < le_perspective)
 				make_line(p, p->mlx, p->win1, p->a);
 			startx += d;
 			ii++;
 		}	
-		p->a = p->a + (d / 3);
+		p->a = p->a + (float)((d / 3));
 		startx = n;
 		starty += d;
 		ii = 0;
@@ -205,15 +224,22 @@ int		spin_x(t_help *p, int m, int n, int d, int **mas)
 			float ty1 = (float)((starty - WIN_Y / 2) + p->d) * cos(alpha_x) + (float)mas[ii + 1][jj] * sin(alpha_x);
 			float tz1 = (float)mas[ii + 1][jj] * cos(alpha_x) - (float)((starty + p->d) - WIN_Y / 2) * sin(alpha_x);
 
-			p->x0 = (tx0 * cos(alpha_z) - (ty0) * sin(alpha_z));
-			p->y0 = ((ty0) * cos(alpha_z) + (tx0) * sin(alpha_z));
-			p->x_end = ((tx1) * cos(alpha_z) - (ty1 * sin(alpha_z)));
-			p->y_end = (ty1 * cos(alpha_z) + ((tx1) * sin(alpha_z)));
+			float t_tx0 = tx0 * cos(alpha_y) + tz0 * sin(alpha_y);
+			float t_ty0 = ty0;
+			float t_tz0 = tz0 * cos(alpha_y) - tx0 * sin(alpha_y);
+			float t_tx1 = tx1 * cos(alpha_y) + tz1 * sin(alpha_y);
+			float t_ty1 = ty1;
+			float t_tz1 = tz1 * cos(alpha_y) - tx1 * sin(alpha_y);
 
-			float perr0 = le_perspective / (le_perspective - tz0);
-			float perr1 = le_perspective / (le_perspective - tz1);
+			p->x0 = (t_tx0 * cos(alpha_z) - t_ty0 * sin(alpha_z));
+			p->y0 = (t_ty0 * cos(alpha_z) + t_tx0 * sin(alpha_z));
+			p->x_end = (t_tx1 * cos(alpha_z) - t_ty1 * sin(alpha_z));
+			p->y_end = (t_ty1 * cos(alpha_z) + t_tx1 * sin(alpha_z));
 
-			p->x0 = (float)p->x0 * perr0 + (WIN_X / 2);
+			float perr0 = le_perspective / (le_perspective - t_tz0);
+			float perr1 = le_perspective / (le_perspective - t_tz1);
+
+			p->x0 = (float)p->x0 * perr0+ (WIN_X / 2);
 			p->y0 = (float)p->y0 * perr0 + (WIN_X / 2);
 			p->x_end = (float)p->x_end * perr1 + (WIN_X / 2);
 			p->y_end = (float)p->y_end * perr1 + (WIN_X / 2);
@@ -227,12 +253,12 @@ int		spin_x(t_help *p, int m, int n, int d, int **mas)
 				p->y_end = p->y0;
 				p->y0 = p->buff;
 			}
-			if (tz0 * kof < le_perspective && tz1 * kof < le_perspective)
+			if (t_tz0 * kof < le_perspective && t_tz1 * kof < le_perspective)
 				make_line(p, p->mlx, p->win1, p->a);
 			starty += d;
 			ii++;
 		}
-		p->a = p->a + (d / 2);
+		p->a = p->a + (float)((d / 3));
 		starty = m;
 		startx += d;
 		ii = 0;
@@ -252,7 +278,6 @@ int		spin_z(t_help *p, int m, int n, int d)
 	jj = p->j;
 	startx = n;
 	starty = m;
-	printf ("ii == %d    jj == %d\n", p->i, p->j);
 	while (ii >= 0)
 	{
 		while (jj > 0)

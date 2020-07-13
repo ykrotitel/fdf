@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 15:54:02 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/12 18:57:20 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/13 15:09:00 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 	p->dx = ABS(p->dx);
 	p->dy = p->y0 - p->y_end;
 	p->dy = ABS(p->dy);
+	if (p->x0 < 0 || p->y0 < 0)
+		return (0);
 	if ((p->x0 >= p->x_end) && (p->dx >= p->dy))
 	{
 		left(p, mlx, win1);

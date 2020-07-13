@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 19:18:09 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/12 20:02:50 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/13 16:40:33 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 #include <fcntl.h>
 #include <math.h> 
 
-# define WIN_X       1200
-# define WIN_Y       1200
+# define WIN_X       1000
+# define WIN_Y       1000
 # define BUFF_SIZE 300000
 # define ABS(x)         (x < 0 ? -x : x)
 
@@ -26,10 +26,8 @@ typedef struct      s_help
     float             a;
     int             x0;
     int             y0;
-    int             z0;
     int             x_end;
     int             y_end;
-    int             z_end;
     int             dirx;
     int             diry;
     int             d;

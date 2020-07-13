@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/07/13 16:45:12 by acarlett          #+#    #+#              #
+#    Updated: 2020/07/13 16:45:19 by acarlett         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 SOURCES =	main.c \
 			right.c \
 			down.c \
@@ -34,11 +46,23 @@ main3: all
 main4: all
 	@./a.out test_maps/pentenegpos.fdf
 
+main5: all
+	@./a.out test_maps/t1.fdf
+
 main6: all
 	@./a.out test_maps/mars.fdf
 
 main7: all
 	@./a.out test_maps/pyramide.fdf
+
+main8: all
+	@./a.out test_maps/50-4.fdf
+
+main9: all
+	@./a.out test_maps/pyra.fdf
+
+fuck: all
+	@./a.out test_maps/fuuuuck.fdf
 
 clean:
 	@rm -rf a.out

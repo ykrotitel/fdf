@@ -6,7 +6,7 @@
 #    By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/13 16:45:12 by acarlett          #+#    #+#              #
-#    Updated: 2020/07/13 16:45:19 by acarlett         ###   ########.fr        #
+#    Updated: 2020/07/13 20:53:59 by acarlett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,11 @@ SOURCES =	main.c \
 			libft/ft_memset.c \
 			libft/ft_atoi.c \
 			libft/ft_strsplit.c \
-			libft/help.c \
+			help.c \
+			spin.c \
+			key_press.c \
+			take_param.c \
+			all_line.c \
 
 INCLUDES =	rainbow.h \
 

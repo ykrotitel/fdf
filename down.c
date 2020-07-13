@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 13:56:14 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/12 18:59:04 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/13 20:23:58 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,7 @@
 
 int		down(t_help *p, void *mlx, void *win1, int color)
 {
-	p->a =     color;
-	p->dx = ABS((p->x_end - p->x0));
-	p->dy = ABS((p->y_end - p->y0));
-	p->x0 = ABS(p->x0);
-	p->y0 = ABS(p->y0);
-	p->err = 0;
-	p->derr = 0;
-	p->derr = (p->dx + 1);
-	p->dirx = ((p->x_end - p->x0) > 0 ? 1 : -1);
+	params_down(p, color);
 	while (p->y0 != p->y_end)
 	{
 		if (p->x0 >= WIN_X || p->y0 >= WIN_Y || p->x0 < 0 || p->y0 < 0)
@@ -33,7 +25,6 @@ int		down(t_help *p, void *mlx, void *win1, int color)
 		else
 		{
 			p->data[p->y0 * WIN_X + p->x0] = p->a;
-			// mlx_pixel_put(mlx, win1, p->x0, p->y0, p->a);
 			p->err += p->derr;
 			if (p->err >= (p->dy + 1))
 			{

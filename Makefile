@@ -6,7 +6,7 @@
 #    By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/13 16:45:12 by acarlett          #+#    #+#              #
-#    Updated: 2020/07/13 20:53:59 by acarlett         ###   ########.fr        #
+#    Updated: 2020/07/14 15:57:29 by acarlett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SOURCES =	main.c \
 			key_press.c \
 			take_param.c \
 			all_line.c \
+			conditions.c \
 
 INCLUDES =	rainbow.h \
 

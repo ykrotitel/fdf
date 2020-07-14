@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 19:18:09 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/13 21:04:17 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/14 16:12:00 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct      s_cord
     float           t_tx1;
     float           t_ty1;
     float           t_tz1;
+    float           per0;
+    float           per1;
 }                   t_cord;
 
 
@@ -124,7 +126,7 @@ int		    make_sharp(t_help *p, int **mas, int j, int i);
 int		    make_increase(t_help *p, int **mas, int key);
 int		    make_unincrease(t_help *p, int **mas, int key);
 int		    tuda(t_help *p, int **mas, int key);
-int		    spin_x(t_help *p, int m, int n, int **mas);
+int		    spin(t_help *p, int m, int n, int **mas);
 int		    ft_error();
 int		    key_press(int key, void *l);
 int		    key_press_2(int key, t_help *p);
@@ -138,3 +140,10 @@ t_help		*params_up(t_help *p);
 t_help		*params_right(t_help *p, int color);
 int		    vertical_lines(t_cord *s, t_help *p, int **mas);
 int		    horizontal_lines(t_cord *s, t_help *p, int **mas);
+int		    lines_first_if(t_help *p, t_cord *s);
+int		    lines_first_else(t_help *p, t_cord *s);
+int		    lines_second_if(t_help *p);
+int		    vertical_conditions(t_help *p, int n);
+int		    horizontal_conditions(t_help *p, int m);
+int		    first_parameters(t_help *p, int n, int m);
+int		spin_second(t_help *p, t_cord *s, int m, int n, int **mas);

@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 20:47:55 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/13 21:05:34 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/14 15:54:41 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,37 @@ int		horizontal_lines(t_cord *s, t_help *p, int **mas)
 
 	s->t_tz0 += p->into;
 	s->t_tz1 += p->into;
+	return (0);
+}
+
+int		lines_first_if(t_help *p, t_cord *s)
+{
+	s->per0 = p->persp / (p->persp - s->t_tz0);
+	s->per1 = p->persp / (p->persp - s->t_tz1);
+			
+	p->x0 = (float)p->x0 * s->per0 + (WIN_X / 2);
+	p->y0 = (float)p->y0 * s->per0 + (WIN_Y / 2);
+	p->x_end = (float)p->x_end * s->per1 + (WIN_X / 2);
+	p->y_end = (float)p->y_end * s->per1 + (WIN_Y / 2);
+	return (0);
+}
+
+int		lines_first_else(t_help *p, t_cord *s)
+{
+	p->x0 = (float)p->x0 + (WIN_X / 2);
+	p->y0 = (float)p->y0 + (WIN_Y / 2);
+	p->x_end = (float)p->x_end + (WIN_X / 2);
+	p->y_end = (float)p->y_end + (WIN_Y / 2);
+	return (0);
+}
+
+int		lines_second_if(t_help *p)
+{
+	p->buff = p->x_end;
+	p->x_end = p->x0;
+	p->x0 = p->buff;
+	p->buff = p->y_end;
+	p->y_end = p->y0;
+	p->y0 = p->buff;
 	return (0);
 }

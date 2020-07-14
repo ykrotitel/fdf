@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 17:29:18 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/13 20:37:54 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/14 16:06:14 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		make_sharp(t_help *p, int **mas, int j, int i)
 	m = p->start_x;
 	n = p->start_y;
 	p->d = d;
-		spin_x(p, m, n, mas);
+		spin(p, m, n, mas);
 	return (0);
 }
 

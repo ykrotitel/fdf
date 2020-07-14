@@ -6,18 +6,18 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 19:42:16 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/13 19:51:06 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/14 18:48:04 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rainbow.h"
+#include "../includes/rainbow.h"
 
 int		ft_takewith(char *s)
 {
 	int i;
 
 	i = 0;
-	while(*s != '\0')
+	while (*s != '\0')
 	{
 		if (*s >= '0' && *s <= '9')
 		{
@@ -43,7 +43,7 @@ int		ft_howlong(int a)
 	return (i);
 }
 
-int		make_increase(t_help *p, int **mas, int key)
+int		make_increase(t_help *p, int **mas)
 {
 	int ii;
 	int jj;
@@ -63,7 +63,7 @@ int		make_increase(t_help *p, int **mas, int key)
 	return (0);
 }
 
-int		make_unincrease(t_help *p, int **mas, int key)
+int		make_unincrease(t_help *p, int **mas)
 {
 	int ii;
 	int jj;
@@ -83,7 +83,7 @@ int		make_unincrease(t_help *p, int **mas, int key)
 	return (0);
 }
 
-int		ft_error()
+int		ft_error(void)
 {
 	write(1, "\n\n      SORRY, MAN :c      \n\n", 30);
 	return (0);

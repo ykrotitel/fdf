@@ -6,18 +6,18 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 17:29:18 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/14 16:06:14 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/14 19:44:30 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rainbow.h"
+#include "../includes/rainbow.h"
 
 int		make_sharp(t_help *p, int **mas, int j, int i)
 {
-	int 	m;
-	int		max;
-	int		n;
-	int		d;
+	int	m;
+	int	max;
+	int	n;
+	int	d;
 
 	p->i = i;
 	p->j = j;
@@ -36,25 +36,28 @@ int		make_sharp(t_help *p, int **mas, int j, int i)
 	m = p->start_x;
 	n = p->start_y;
 	p->d = d;
-		spin(p, m, n, mas);
+	spin(p, m, n, mas);
 	return (0);
 }
 
 int		main(int argc, char **argv)
 {
-	t_help				*p;
-	int					j;
-	int					m;
-	
+	t_help	*p;
+
 	p = malloc(sizeof(t_help));
 	p->mlx = mlx_init();
+	if (argc)
+		argc = -(-(argc));
 	p->win1 = mlx_new_window(p->mlx, WIN_X, WIN_Y, "FDF");
 	p->img = mlx_new_image(p->mlx, WIN_X, WIN_Y);
 	p->data = (int *)mlx_get_data_addr(p->img, &(p->q1), &(p->q2), &(p->q3));
 	p->i = 0;
 	p->j = 0;
 	p->m = 0;
-	p->fd = open(argv[1], O_RDONLY);
+	if ((p->fd = open(argv[1], O_RDONLY)) == -1)
+		return (ft_error());
+	printf("fd = %d\n", p->fd);
+	write (1, "RT\n", 3);
 	while (get_next_line(p->fd, &(p->s)) > 0)
 	{
 		p->i++;
@@ -71,25 +74,26 @@ int		main(int argc, char **argv)
 int		continue1(t_help *p, char **argv)
 {
 	int		j;
-	char	*buff;
 
 	j = 0;
 	p->fd = open(argv[1], O_RDONLY);
 	p->line = malloc(sizeof(char *) * p->i);
 	p->mas = malloc(sizeof(int *) * p->i);
-	while(get_next_line(p->fd, &(p->line[p->j])) > 0)
+	while (get_next_line(p->fd, &(p->line[p->j])) > 0)
 	{
 		p->mas[p->j] = malloc(sizeof(int) * p->m);
 		p->j++;
 	}
 	p->j = p->j - 1;
 	p->mm = 0;
-	continue2(j, p, buff);
+	continue2(j, p);
 	return (0);
 }
 
-int		continue2(int j, t_help *p, char *buff)
+int		continue2(int j, t_help *p)
 {
+	char *buff;
+
 	while (j <= p->j)
 	{
 		buff = p->line[j];
@@ -97,7 +101,7 @@ int		continue2(int j, t_help *p, char *buff)
 		{
 			while (*buff == ' ')
 				(buff)++;
-			p->mas[j][p->mm] = ft_atoi(buff);
+			p->mas[j][p->mm] = (ft_atoi(buff) * 3);
 			while (*buff != ' ')
 				buff++;
 			p->mm++;
@@ -106,7 +110,7 @@ int		continue2(int j, t_help *p, char *buff)
 		j++;
 	}
 	continue3(p);
-	return(0);
+	return (0);
 }
 
 int		continue3(t_help *p)
@@ -114,9 +118,9 @@ int		continue3(t_help *p)
 	p->coord = p->mas;
 	p->i = p->i - 1;
 	p->col = 100 / (MAX(p->i, p->m) / 2);
-	p->alpha_x = 0.0;
-	p->alpha_y = 0.0;
-	p->alpha_z = 0.0;
+	p->a_x = 0.0;
+	p->a_y = 0.0;
+	p->a_z = 0.0;
 	p->persp = 1000.0;
 	p->koef = 1.05;
 	p->into = 1;

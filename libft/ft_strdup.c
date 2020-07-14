@@ -6,11 +6,11 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 19:59:29 by vabraham          #+#    #+#             */
-/*   Updated: 2020/06/30 17:35:15 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/14 18:49:58 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../rainbow.h"
+#include "../includes/rainbow.h"
 
 char	*ft_strdup(const char *str)
 {

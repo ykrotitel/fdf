@@ -6,11 +6,11 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 20:22:55 by vabraham          #+#    #+#             */
-/*   Updated: 2020/06/30 17:34:58 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/14 18:49:47 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../rainbow.h"
+#include "../includes/rainbow.h"
 
 void	*ft_memalloc(size_t size)
 {

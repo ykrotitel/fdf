@@ -6,11 +6,11 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 20:16:18 by vabraham          #+#    #+#             */
-/*   Updated: 2020/06/30 17:35:18 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/14 18:50:01 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../rainbow.h"
+#include "../includes/rainbow.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

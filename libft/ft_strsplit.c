@@ -6,11 +6,11 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 22:03:21 by vabraham          #+#    #+#             */
-/*   Updated: 2020/07/01 14:05:28 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/14 18:50:17 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../rainbow.h"
+#include "../includes/rainbow.h"
 
 static char	**help0(char **a, int j)
 {

@@ -6,11 +6,11 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 20:41:43 by vabraham          #+#    #+#             */
-/*   Updated: 2020/06/30 17:35:04 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/14 18:49:50 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../rainbow.h"
+#include "../includes/rainbow.h"
 
 void	*ft_memset(void *dest, int n, size_t size)
 {

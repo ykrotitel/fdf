@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   right.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/01 19:12:23 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/01 19:14:56 by acarlett         ###   ########.fr       */
+/*   Created: 2020/06/28 19:14:51 by acarlett          #+#    #+#             */
+/*   Updated: 2020/07/14 18:48:18 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rainbow.h"
+#include "../includes/rainbow.h"
 
-int main()
+int		right(t_help *p, int color)
 {
-    char **s;
-    int i;
-
-    i = 0;
-    s = malloc(sizeof(char *) * 10);
-    while(i != 10)
-    {
-        s[i] = malloc(sizeof(char) * 10);
-        i++;
-    }
-    printf (">%c<", s[3][4]);
-    return 0;
+	params_right(p, color);
+	while (p->x0 != p->x_end)
+	{
+		if (p->x0 >= WIN_X || p->y0 >= WIN_Y || p->x0 < 0 || p->y0 < 0)
+			p->x0++;
+		else
+		{
+			p->data[p->y0 * WIN_X + p->x0] = p->a;
+			p->err += p->derr;
+			if (p->err >= (p->dx + 1))
+			{
+				p->y0 += p->diry;
+				p->err -= (p->dx + 1);
+			}
+			p->x0++;
+		}
+	}
+	return (0);
 }

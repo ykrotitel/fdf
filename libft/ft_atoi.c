@@ -6,11 +6,11 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 21:03:47 by vabraham          #+#    #+#             */
-/*   Updated: 2020/07/01 12:54:49 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/14 18:49:43 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../rainbow.h"
+#include "../includes/rainbow.h"
 
 int		ft_atoi(const char *str)
 {

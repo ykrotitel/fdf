@@ -6,16 +6,22 @@
 #    By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/13 16:45:12 by acarlett          #+#    #+#              #
-#    Updated: 2020/07/14 15:57:29 by acarlett         ###   ########.fr        #
+#    Updated: 2020/07/14 19:19:44 by acarlett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SOURCES =	main.c \
-			right.c \
-			down.c \
-			left.c \
-			up.c \
-			make_line.c \
+SOURCES =	sources/main.c \
+			sources/right.c \
+			sources/down.c \
+			sources/left.c \
+			sources/up.c \
+			sources/make_line.c \
+			sources/help.c \
+			sources/spin.c \
+			sources/key_press.c \
+			sources/take_param.c \
+			sources/all_line.c \
+			sources/conditions.c \
 			libft/get_next_line.c \
 			libft/ft_strchr.c \
 			libft/ft_strdup.c \
@@ -27,17 +33,31 @@ SOURCES =	main.c \
 			libft/ft_memset.c \
 			libft/ft_atoi.c \
 			libft/ft_strsplit.c \
-			help.c \
-			spin.c \
-			key_press.c \
-			take_param.c \
-			all_line.c \
-			conditions.c \
 
-INCLUDES =	rainbow.h \
+INCLUDES =	includes/rainbow.h \
 
-all:
-	@cc -I /usr/local/include $(SOURCES) -I $(INCLUDES) -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
+OBJ = $(patsubst %.c,%.o,$(SOURCES))
+
+NAME = fdf
+
+all: $(NAME)
+
+$(NAME): $(OBJ) clean
+	@cc -Wall -Wextra -Werror  -I /usr/local/include $(SOURCES) -I $(INCLUDES) -o $(NAME) -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
+
+%.o: %.c
+	@cc -Wall -Werror -Wextra -I $(INCLUDES) $< -c -o $@
+
+clean:
+	@rm -rf $(OBJ)
+	@rm -rf 
+
+fclean: clean
+	@rm -rf $(NAME)
+
+re: clean all
+
+.PHONY: all clean fclean re
 
 main1: all
 	@./a.out test_maps/42.fdf
@@ -68,8 +88,3 @@ main9: all
 
 fuck: all
 	@./a.out test_maps/fuuuuck.fdf
-
-clean:
-	@rm -rf a.out
-
-re: clean all

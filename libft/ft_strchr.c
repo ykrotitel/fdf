@@ -6,11 +6,11 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 20:45:24 by vabraham          #+#    #+#             */
-/*   Updated: 2020/06/30 17:35:07 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/14 18:49:54 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../rainbow.h"
+#include "../includes/rainbow.h"
 
 char	*ft_strchr(const char *str, int ch)
 {

@@ -6,11 +6,11 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 19:49:04 by vabraham          #+#    #+#             */
-/*   Updated: 2020/06/30 17:35:22 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/14 18:50:05 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../rainbow.h"
+#include "../includes/rainbow.h"
 
 size_t	ft_strlen(const char *str)
 {

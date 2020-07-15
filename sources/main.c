@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 17:29:18 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/14 19:44:30 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/15 17:04:22 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ int		main(int argc, char **argv)
 	p->m = 0;
 	if ((p->fd = open(argv[1], O_RDONLY)) == -1)
 		return (ft_error());
-	printf("fd = %d\n", p->fd);
-	write (1, "RT\n", 3);
 	while (get_next_line(p->fd, &(p->s)) > 0)
 	{
 		p->i++;
@@ -106,6 +104,7 @@ int		continue2(int j, t_help *p)
 				buff++;
 			p->mm++;
 		}
+		free(p->line[j]);
 		p->mm = 0;
 		j++;
 	}

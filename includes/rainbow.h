@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 16:35:50 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/14 18:45:19 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/15 16:47:59 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ typedef struct			s_help
 	int					**mas;
 	int					i;
 	int					j;
-	int					jj;
 	int					ii;
+	int					jj;
 	int					n;
 	int					m;
 	int					mm;

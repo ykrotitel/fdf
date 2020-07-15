@@ -6,7 +6,7 @@
 #    By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/13 16:45:12 by acarlett          #+#    #+#              #
-#    Updated: 2020/07/14 19:19:44 by acarlett         ###   ########.fr        #
+#    Updated: 2020/07/15 17:12:30 by acarlett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ NAME = fdf
 
 all: $(NAME)
 
-$(NAME): $(OBJ) clean
+$(NAME): $(OBJ)
 	@cc -Wall -Wextra -Werror  -I /usr/local/include $(SOURCES) -I $(INCLUDES) -o $(NAME) -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
 %.o: %.c

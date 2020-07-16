@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 17:29:18 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/15 17:04:22 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/16 18:44:02 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,21 @@
 int		make_sharp(t_help *p, int **mas, int j, int i)
 {
 	int	m;
-	int	max;
 	int	n;
 	int	d;
 
 	p->i = i;
 	p->j = j;
-	max = MAX(i, j);
-	d = (MAX(WIN_X, WIN_Y) - 200) / max;
-	if (max == i)
+	d = (MIN(WIN_X, WIN_Y) - 400) / MAX(i, j);
+	if (MAX(i, j) == j)
 	{
-		p->start_x = 100;
-		p->start_y = (((WIN_X / d) - j) / 2) * d;
+		p->start_y = 200;
+		p->start_x = (WIN_Y / 2) - (p->j * d) / 2;
 	}
-	else if (max == j)
+	else if (MAX(i, j) == i)
 	{
-		p->start_x = (((WIN_X / d) - i) / 2) * d;
-		p->start_y = 100;
+		p->start_y = (WIN_X / 2) - (p->i * d) / 2;
+		p->start_x = 200;
 	}
 	m = p->start_x;
 	n = p->start_y;
@@ -46,25 +44,29 @@ int		main(int argc, char **argv)
 
 	p = malloc(sizeof(t_help));
 	p->mlx = mlx_init();
-	if (argc)
-		argc = -(-(argc));
+	if (argc > 2)
+		return (ft_error(4));
 	p->win1 = mlx_new_window(p->mlx, WIN_X, WIN_Y, "FDF");
 	p->img = mlx_new_image(p->mlx, WIN_X, WIN_Y);
 	p->data = (int *)mlx_get_data_addr(p->img, &(p->q1), &(p->q2), &(p->q3));
 	p->i = 0;
 	p->j = 0;
 	p->m = 0;
-	if ((p->fd = open(argv[1], O_RDONLY)) == -1)
-		return (ft_error());
-	while (get_next_line(p->fd, &(p->s)) > 0)
+	p->mm = 0;
+	if ((p->fd = open(argv[1], O_RDONLY)) == -1 ||
+	p->fd == 0)
+		return (ft_error(p->fd));
+	while ((p->per = get_next_line(p->fd, &(p->s))) > 0)
 	{
 		p->i++;
 		p->m = ft_takewith(p->s);
+		if (p->mm && p->m != p->mm)
+			return (ft_error(2));
+		p->mm = p->m;
 		free(p->s);
 	}
-	p->n = p->m - 1;
-	p->per = 0;
-	close(p->fd);
+	if (!p->per && !p->i)
+		return(ft_error(1));
 	continue1(p, argv);
 	return (0);
 }
@@ -73,6 +75,9 @@ int		continue1(t_help *p, char **argv)
 {
 	int		j;
 
+	p->n = p->m - 1;
+	p->per = 0;
+	close(p->fd);
 	j = 0;
 	p->fd = open(argv[1], O_RDONLY);
 	p->line = malloc(sizeof(char *) * p->i);
@@ -121,9 +126,10 @@ int		continue3(t_help *p)
 	p->a_y = 0.0;
 	p->a_z = 0.0;
 	p->persp = 1000.0;
-	p->koef = 1.05;
+	p->koef = 1.03;
 	p->into = 1;
 	mlx_hook(p->win1, 2, 0, key_press, (void *)p);
+	blackground(p);
 	make_sharp(p, p->mas, p->n, p->i);
 	mlx_put_image_to_window(p->mlx, p->win1, p->img, 0, 0);
 	mlx_loop(p->mlx);

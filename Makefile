@@ -6,7 +6,7 @@
 #    By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/13 16:45:12 by acarlett          #+#    #+#              #
-#    Updated: 2020/07/15 17:12:30 by acarlett         ###   ########.fr        #
+#    Updated: 2020/07/16 18:22:56 by acarlett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SOURCES =	sources/main.c \
 			libft/ft_memalloc.c \
 			libft/ft_memset.c \
 			libft/ft_atoi.c \
+			libft/ft_split.c \
 			libft/ft_strsplit.c \
 
 INCLUDES =	includes/rainbow.h \
@@ -45,7 +46,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@cc -Wall -Wextra -Werror  -I /usr/local/include $(SOURCES) -I $(INCLUDES) -o $(NAME) -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
-%.o: %.c
+%.o: %.c $(INCLUDES)
 	@cc -Wall -Werror -Wextra -I $(INCLUDES) $< -c -o $@
 
 clean:

@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+// /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   rainbow.h                                          :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 16:35:50 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/15 16:47:59 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/16 16:02:48 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define WIN_X			1200
-# define WIN_Y			1200
+// # define WIN_X			1800
+// # define WIN_Y			1200
+# define WIN_X			1000
+# define WIN_Y			1000
 # define BUFF_SIZE		300000
 # define ABS(x)			(x < 0 ? -x : x)
 
@@ -108,7 +110,7 @@ int						make_increase(t_help *p, int **mas);
 int						make_unincrease(t_help *p, int **mas);
 int						tuda(t_help *p, int **mas, int key);
 int						spin(t_help *p, int m, int n, int **mas);
-int						ft_error(void);
+int						ft_error(int a);
 int						key_press(int key, void *l);
 int						key_press_2(int key, t_help *p);
 int						blackground(t_help *p);
@@ -130,6 +132,7 @@ char					*ft_strncpy(char *dest, const char *src, size_t n);
 char					*ft_strnew(size_t size);
 char					*ft_strjoin(char const *s1, char const *s2);
 void					*ft_memalloc(size_t size);
+char					**ft_split(char *str);
 size_t					ft_strlen(const char *str);
 void					*ft_memset(void *dest, int n, size_t size);
 char					**ft_strsplit(char const *s, char c);

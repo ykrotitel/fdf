@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 18:41:24 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/15 17:07:30 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/16 14:44:59 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ int		spin(t_help *p, int m, int n, int **mas)
 				lines_first_else(p);
 			if (p->x0 < 0 || p->y0 < 0 || p->x0 > WIN_X || p->y0 > WIN_Y)
 				lines_second_if(p);
-			if (s.t_tz0 * p->koef < p->persp && s.t_tz1 * p->koef < p->persp)
+			if (s.t_tz0 * p->koef < p->persp && s.t_tz1 * p->koef < p->persp && p->per)
+				make_line(p, p->a);
+			else if (!p->per)
 				make_line(p, p->a);
 			p->startx += p->d;
 			p->ii++;
@@ -52,8 +54,10 @@ int		spin_second(t_help *p, t_cord *s, int m, int n)
 			else
 				lines_first_else(p);
 			if (p->x0 < 0 || p->y0 < 0 || p->x0 > WIN_X || p->y0 > WIN_Y)
-				lines_second_if(p);
-			if (s->t_tz0 * p->koef < p->persp && s->t_tz1 * p->koef < p->persp)
+				lines_second_if(p);	
+			if (s->t_tz0 * p->koef < p->persp && s->t_tz1 * p->koef < p->persp && p->per)
+				make_line(p, p->a);
+			else if (!p->per)
 				make_line(p, p->a);
 			p->starty += p->d;
 			p->ii++;

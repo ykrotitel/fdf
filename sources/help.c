@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 19:42:16 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/14 18:48:04 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/16 18:46:44 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 int		ft_takewith(char *s)
 {
-	int i;
+	char	**line;
+	int		i;
+	int		j;
 
 	i = 0;
-	while (*s != '\0')
+	j = 0;
+	line = ft_split(s);
+	while(line[i])
 	{
-		if (*s >= '0' && *s <= '9')
-		{
-			while (*s >= '0' && *s <= '9')
-				s++;
-			i++;
-		}
-		s++;
+		while(line[i][j] != '\0')
+			j++;
+		i++;
+		j = 0;
 	}
 	return (i);
 }
@@ -83,8 +84,17 @@ int		make_unincrease(t_help *p, int **mas)
 	return (0);
 }
 
-int		ft_error(void)
+int		ft_error(int a)
 {
-	write(1, "\n\n      SORRY, MAN :c      \n\n", 30);
+	write(1, "\n\n                   SORRY, MAN :c                   \n\n", 56);
+	write(1, "      BUT YOU CAN USE FDF LIKE THIS: ./fdf name_map     \n\n", 58);
+	if (a == 0)
+		write (1, "\n                    EMPTY FILE                    \n", 52);
+	else if (a == 2)
+		write (1, "\n                   INVALID MAP                   \n", 51);
+	else if (a == 4)
+		write (1, "\n                TOO MUCH ARGUMENTS              \n", 50);
+	else if (a == -1)
+		write (1, "\n                 NONEXISTENT FILE               \n", 50);
 	return (0);
 }

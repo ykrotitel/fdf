@@ -6,7 +6,7 @@
 #    By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/13 16:45:12 by acarlett          #+#    #+#              #
-#    Updated: 2020/07/16 18:22:56 by acarlett         ###   ########.fr        #
+#    Updated: 2020/07/21 18:37:36 by acarlett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,18 +22,18 @@ SOURCES =	sources/main.c \
 			sources/take_param.c \
 			sources/all_line.c \
 			sources/conditions.c \
-			libft/get_next_line.c \
-			libft/ft_strchr.c \
-			libft/ft_strdup.c \
-			libft/ft_strjoin.c \
-			libft/ft_strncpy.c \
-			libft/ft_strnew.c \
-			libft/ft_strlen.c \
-			libft/ft_memalloc.c \
-			libft/ft_memset.c \
-			libft/ft_atoi.c \
-			libft/ft_split.c \
-			libft/ft_strsplit.c \
+			sources/get_next_line.c \
+			sources/ft_strchr.c \
+			sources/ft_strdup.c \
+			sources/ft_strjoin.c \
+			sources/ft_strncpy.c \
+			sources/ft_strnew.c \
+			sources/ft_strlen.c \
+			sources/ft_memalloc.c \
+			sources/ft_memset.c \
+			sources/ft_atoi.c \
+			sources/ft_split.c \
+			sources/ft_strsplit.c \
 
 INCLUDES =	includes/rainbow.h \
 

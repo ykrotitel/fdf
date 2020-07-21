@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:21:32 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/16 18:21:57 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/21 18:38:15 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*malloc_word(char *str)
 {
 	char	*word;
 	int		i;
-	
+
 	i = 0;
 	while (str[i] && str[i] != ' ' && str[i] != '\n' && str[i] != '\t')
 		i++;

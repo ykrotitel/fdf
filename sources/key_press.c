@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 19:53:48 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/14 18:48:07 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/21 18:30:53 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,25 @@ int		blackground(t_help *p)
 		make_line(p, 0x303030);
 		j++;
 	}
+	return (0);
+}
+
+int		main_second(t_help *p, char **argv)
+{
+	if ((p->fd = open(argv[1], O_RDONLY)) == -1 ||
+	p->fd == 0)
+		return (ft_error(p->fd));
+	while ((p->per = get_next_line(p->fd, &(p->s))) > 0)
+	{
+		p->i++;
+		p->m = ft_takewith(p->s);
+		if (p->mm && p->m != p->mm)
+			return (ft_error(2));
+		p->mm = p->m;
+		free(p->s);
+	}
+	if (!p->per && !p->i)
+		return (ft_error(1));
+	continue1(p, argv);
 	return (0);
 }

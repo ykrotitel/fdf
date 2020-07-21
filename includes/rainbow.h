@@ -1,4 +1,4 @@
-// /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   rainbow.h                                          :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 16:35:50 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/16 16:02:48 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/21 18:26:04 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include <fcntl.h>
 # include <math.h>
 
-// # define WIN_X			1800
-// # define WIN_Y			1200
 # define WIN_X			1000
 # define WIN_Y			1000
 # define BUFF_SIZE		300000
@@ -141,5 +139,6 @@ t_help					*params_left(t_help *p);
 t_help					*params_up(t_help *p);
 t_help					*params_right(t_help *p, int color);
 int						key_press_3(int key, t_help *p);
+int						main_second(t_help *p, char **argv);
 
 #endif

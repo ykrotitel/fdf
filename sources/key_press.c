@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 19:53:48 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/21 18:30:53 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/22 17:18:42 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 int		key_press_2(int key, t_help *p)
 {
+	if (key == 30)
+		p->a_y += 0.1;
+	else if (key == 33)
+		p->a_y -= 0.1;
 	if (key == 24 && p->persp > 100)
 		p->persp -= 100;
 	else if (key == 27)
@@ -42,7 +46,10 @@ int		key_press_3(int key, t_help *p)
 		p->a_y = 0.0;
 		p->a_z = 0.0;
 	}
+	p->a = 0x303030;
 	blackground(p);
+	if (p->i == 1 && p->m == 1)
+		return (0);
 	make_sharp(p, p->coord, p->n, p->i);
 	mlx_put_image_to_window(p->mlx, p->win1, p->img, 0, 0);
 	return (0);
@@ -56,6 +63,8 @@ int		key_press(int key, void *l)
 	p->key = key;
 	if (key == 53)
 		exit(0);
+	else if (p->i == 1 && p->m == 1)
+		return (0);
 	else if (key == 124)
 		p->a_z += 0.1;
 	else if (key == 123)
@@ -68,10 +77,6 @@ int		key_press(int key, void *l)
 		make_increase(p, p->coord);
 	else if (key == 20)
 		make_unincrease(p, p->coord);
-	else if (key == 30)
-		p->a_y += 0.1;
-	else if (key == 33)
-		p->a_y -= 0.1;
 	key_press_2(key, p);
 	return (0);
 }
@@ -109,7 +114,7 @@ int		main_second(t_help *p, char **argv)
 		p->mm = p->m;
 		free(p->s);
 	}
-	if (!p->per && !p->i)
+	if (p->per <= 0 && !p->i)
 		return (ft_error(1));
 	continue1(p, argv);
 	return (0);

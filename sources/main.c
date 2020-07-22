@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 17:29:18 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/21 18:30:36 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/22 17:16:08 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		make_sharp(t_help *p, int **mas, int j, int i)
 	p->i = i;
 	p->j = j;
 	d = (MIN(WIN_X, WIN_Y) - 400) / MAX(i, j);
+	d = (d ? d : 1);
 	if (MAX(i, j) == j)
 	{
 		p->start_y = 200;
@@ -99,15 +100,28 @@ int		continue2(int j, t_help *p)
 		p->mm = 0;
 		j++;
 	}
+	p->coord = p->mas;
+	p->i = p->i - 1;
+	p->i = (p->i ? p->i : 1);
 	continue3(p);
 	return (0);
 }
 
 int		continue3(t_help *p)
 {
-	p->coord = p->mas;
-	p->i = p->i - 1;
-	p->col = 100 / (MAX(p->i, p->m) / 2);
+	if (p->i == 1 && p->m == 1)
+	{
+		p->a = 0x303030;
+		blackground(p);
+		p->data[(int)(((float)WIN_Y / 2.0) *
+		WIN_X + ((float)WIN_X / 2.0))] = 0xff0000;
+		mlx_put_image_to_window(p->mlx, p->win1, p->img, 0, 0);
+		mlx_hook(p->win1, 2, 0, key_press, (void *)p);
+		mlx_loop(p->mlx);
+		return (0);
+	}
+	else
+		p->col = 100 / (MAX(p->i, p->m) / 2);
 	p->a_x = 0.0;
 	p->a_y = 0.0;
 	p->a_z = 0.0;

@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 19:42:16 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/21 18:19:40 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/22 17:18:37 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ int		ft_takewith(char *s)
 		i++;
 		j = 0;
 	}
+	j = 0;
+	while (line[j])
+		free(line[j++]);
+	free(line);
 	return (i);
 }
 

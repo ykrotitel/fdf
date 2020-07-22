@@ -6,7 +6,7 @@
 #    By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/13 16:45:12 by acarlett          #+#    #+#              #
-#    Updated: 2020/07/21 18:37:36 by acarlett         ###   ########.fr        #
+#    Updated: 2020/07/22 17:10:33 by acarlett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,10 +44,10 @@ NAME = fdf
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@cc -Wall -Wextra -Werror  -I /usr/local/include $(SOURCES) -I $(INCLUDES) -o $(NAME) -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
+	@cc -I /usr/local/include $(SOURCES) -I $(INCLUDES) -o $(NAME) -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
 %.o: %.c $(INCLUDES)
-	@cc -Wall -Werror -Wextra -I $(INCLUDES) $< -c -o $@
+	@cc -I $(INCLUDES) $< -c -o $@
 
 clean:
 	@rm -rf $(OBJ)
@@ -86,6 +86,3 @@ main8: all
 
 main9: all
 	@./a.out test_maps/pyra.fdf
-
-fuck: all
-	@./a.out test_maps/fuuuuck.fdf

@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 17:29:18 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/25 14:15:38 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/26 18:29:05 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int		continue1(t_help *p, char **argv)
 		p->mas[p->j] = malloc(sizeof(int) * p->m);
 		p->j++;
 	}
+	if (!(ft_first_check_line(p->line, p->j, p)))
+		return (ft_error(2));
 	p->j = p->j - 1;
 	p->mm = 0;
 	continue2(j, p);
@@ -86,7 +88,7 @@ int		continue2(int j, t_help *p)
 
 	while (j <= p->j)
 	{
-		buff = p->line[j];    //ПРОВЕРИТЬ ВЕСЬ **line НА НАЛИЧИЕ БУКВ, ЛЮБОЙ ЭЛЕМЕНТ ДОЛЖЕН БЫТЬ ЛИБО ' ', '\t', '\n', '\0', ('0', '9'), '-'. НЕ ЗАБЫТЬ ЧТО ЦВЕТ НАДО ПРОПУСКАТЬ, А ПРОСТО БУКВУ ВЫВОДИТЬ error.
+		buff = p->line[j];
 		while (p->mm != p->m)
 		{
 			while (*buff == ' ')

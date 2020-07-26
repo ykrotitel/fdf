@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 16:35:50 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/21 20:32:26 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/26 18:29:12 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,6 @@ t_help					*params_up(t_help *p);
 t_help					*params_right(t_help *p, int color);
 int						key_press_3(int key, t_help *p);
 int						main_second(t_help *p, char **argv);
+int						ft_first_check_line(char **argv, int size, t_help *p);
 
 #endif

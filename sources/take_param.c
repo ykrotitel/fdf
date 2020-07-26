@@ -6,7 +6,7 @@
 /*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 20:18:48 by acarlett          #+#    #+#             */
-/*   Updated: 2020/07/14 18:48:28 by acarlett         ###   ########.fr       */
+/*   Updated: 2020/07/26 18:40:38 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,32 @@ t_help		*params_up(t_help *p)
 	p->derr = (p->dx + 1);
 	p->dirx = ((p->x_end - p->x0) > 0 ? 1 : -1);
 	return (p);
+}
+
+int			ft_first_check_line(char **argv, int size, t_help *p)
+{
+	p->ii = 0;
+	p->jj = 0;
+	while (p->ii < size)
+	{
+		while (argv[p->ii][p->jj] != '\n' && argv[p->ii][p->jj] != '\0')
+		{
+			while (argv[p->ii][p->jj] == ' ' || argv[p->ii][p->jj] == '\t')
+				p->jj++;
+			if (argv[p->ii][p->jj] == '-' || argv[p->ii][p->jj] == '+')
+				p->jj++;
+			while (argv[p->ii][p->jj] >= '0' && argv[p->ii][p->jj] <= '9')
+				p->jj++;
+			if (argv[p->ii][p->jj] != ',' && argv[p->ii][p->jj] != ' ' &&
+			argv[p->ii][p->jj] != '\t' && argv[p->ii][p->jj] != '\n' &&
+			argv[p->ii][p->jj] != '\0')
+				return (0);
+			while (argv[p->ii][p->jj] != ' ' && argv[p->ii][p->jj] != '\t' &&
+			argv[p->ii][p->jj] != '\n' && argv[p->ii][p->jj] != '\0')
+				p->jj++;
+		}
+		p->jj = 0;
+		p->ii++;
+	}
+	return (1);
 }

@@ -1,9 +1,9 @@
 # FDF
-### About
+### :white_square_button: About
 
 FdF is a project of ***School 42***. A simple 3D height-map render. It made using the minilibx library. It is possible to rotate the figure, increase the perspective and change the depth of the figure.
 
-### Grade
+### :white_square_button: Grade
 
 ***Score 118/125***
 ```
@@ -55,7 +55,7 @@ Bonus paty 18/25
 
 # How to install and use
 
-### Installation
+### :white_square_button: Installation
 
 ```
 git clone https://github.com/ykrotitel/fdf.git fdf
@@ -65,7 +65,7 @@ cd fdf
 make
 ```
 
-### Usage
+### :white_square_button: Usage
 ```
 ./fdf test_maps/"map name"
 ```
@@ -78,6 +78,4 @@ make
 
 ***P*** - on/off perspective
 
-:heavy_plus_sign: - more perspective
-
-:heavy_minus_sign: - less perspective
+:heavy_plus_sign:, :heavy_minus_sign: - handle perspective
